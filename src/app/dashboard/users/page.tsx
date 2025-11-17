@@ -62,7 +62,7 @@ export default function UsersPage() {
           <h1 className="text-3xl font-bold text-gray-900">ผู้ใช้งาน</h1>
           <p className="text-gray-500 mt-1">จัดการบัญชีผู้ใช้และสิทธิ์การเข้าถึง</p>
         </div>
-        <button className="bg-slate-700 text-white px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2 font-medium shadow-md">
+        <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 font-medium shadow-md">
           <Plus size={20} />
           เพิ่มผู้ใช้
         </button>
@@ -76,7 +76,7 @@ export default function UsersPage() {
               <input
                 type="text"
                 placeholder="ค้นหาผู้ใช้..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
             <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function UsersPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button className="text-cyan-600 hover:text-cyan-900 mr-4">แก้ไข</button>
+                        <button className="text-blue-600 hover:text-blue-900 mr-4">แก้ไข</button>
                         <button className="text-red-600 hover:text-red-900">ลบ</button>
                       </td>
                     </tr>

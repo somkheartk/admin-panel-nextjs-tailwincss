@@ -34,7 +34,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="admin@example.com"
                 required
               />
@@ -63,7 +63,7 @@ export default function LoginPage() {
                 id="role"
                 value={role}
                 onChange={(e) => setRole(e.target.value as any)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent capitalize"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent capitalize"
               >
                 <option value="admin">ผู้ดูแลระบบ (Admin)</option>
                 <option value="manager">ผู้จัดการ (Manager)</option>
@@ -73,7 +73,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-slate-700 text-white py-3 rounded-lg hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 font-medium shadow-md"
+              className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 font-medium shadow-md"
             >
               <LogIn size={20} />
               เข้าสู่ระบบ
@@ -83,7 +83,7 @@ export default function LoginPage() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               ลืมรหัสผ่าน?{' '}
-              <a href="#" className="text-cyan-600 hover:text-cyan-700 font-medium">
+              <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
                 รีเซ็ตรหัสผ่าน
               </a>
             </p>

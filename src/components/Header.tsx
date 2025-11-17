@@ -2,9 +2,11 @@
 
 import { Bell, Search, Menu, LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Header() {
   const { user, switchRole, logout } = useAuth();
+  const { t, language, setLanguage } = useLanguage();
 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
@@ -19,16 +21,26 @@ export default function Header() {
             <input
               type="text"
               placeholder="Search products, orders, customers..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Language Switcher */}
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as 'th' | 'en')}
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="en">🇬🇧 English</option>
+          </select>
+
           <select 
             value={user?.role} 
             onChange={(e) => switchRole(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-slate-500 capitalize"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 capitalize"
           >
             <option value="admin">Admin</option>
             <option value="manager">Manager</option>
@@ -43,13 +55,13 @@ export default function Header() {
           <button 
             onClick={logout}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors text-red-600"
-            title="ออกจากระบบ"
+            title={t('common.logout')}
           >
             <LogOut size={20} />
           </button>
 
           <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-            <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
               {user?.name.charAt(0)}
             </div>
             <div className="hidden md:block">

@@ -91,7 +91,7 @@ export default function DashboardPage() {
       change: `+${stats.salesChange}%`,
       trend: 'up',
       icon: DollarSign,
-      color: 'bg-slate-700',
+      color: 'bg-indigo-600',
     },
     {
       title: 'คำสั่งซื้อวันนี้',
@@ -99,7 +99,7 @@ export default function DashboardPage() {
       change: `+${stats.ordersChange}%`,
       trend: 'up',
       icon: ShoppingCart,
-      color: 'bg-cyan-600',
+      color: 'bg-blue-600',
     },
     {
       title: 'สินค้าทั้งหมด',
@@ -107,7 +107,7 @@ export default function DashboardPage() {
       change: `${stats.productsChange}%`,
       trend: 'down',
       icon: Package,
-      color: 'bg-slate-600',
+      color: 'bg-blue-700',
     },
     {
       title: 'รายได้',
@@ -137,7 +137,7 @@ export default function DashboardPage() {
                   <Icon className="text-white" size={24} />
                 </div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === 'up' ? 'text-cyan-600' : 'text-red-600'
+                  stat.trend === 'up' ? 'text-blue-600' : 'text-red-600'
                 }`}>
                   {stat.trend === 'up' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
                   {stat.change}
@@ -174,8 +174,8 @@ export default function DashboardPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{order.amount}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.status === 'Completed' ? 'bg-cyan-100 text-cyan-900' :
-                      order.status === 'Processing' ? 'bg-slate-200 text-slate-900' :
+                      order.status === 'Completed' ? 'bg-blue-100 text-blue-900' :
+                      order.status === 'Processing' ? 'bg-indigo-100 text-indigo-900' :
                       'bg-yellow-100 text-yellow-800'
                     }`}>
                       {order.status}

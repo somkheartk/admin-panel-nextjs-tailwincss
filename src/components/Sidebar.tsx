@@ -14,6 +14,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { menuItems } from '@/config/menu';
 import { useState } from 'react';
 
@@ -30,6 +31,7 @@ const iconMap: Record<string, any> = {
 export default function Sidebar() {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [collapsed, setCollapsed] = useState(false);
 
   const filteredMenuItems = menuItems.filter(item => 
@@ -37,12 +39,12 @@ export default function Sidebar() {
   );
 
   return (
-    <aside className={`${collapsed ? 'w-20' : 'w-64'} bg-gradient-to-b from-slate-900 to-slate-800 text-white transition-all duration-300 ease-in-out flex flex-col shadow-lg`}>
-      <div className="p-6 flex items-center justify-between border-b border-slate-700">
+    <aside className={`${collapsed ? 'w-20' : 'w-64'} bg-gradient-to-b from-indigo-900 to-indigo-800 text-white transition-all duration-300 ease-in-out flex flex-col shadow-lg`}>
+      <div className="p-6 flex items-center justify-between border-b border-indigo-700">
         {!collapsed && <h1 className="text-2xl font-bold text-white">⚡ Flash POS</h1>}
         <button 
           onClick={() => setCollapsed(!collapsed)}
-          className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+          className="p-2 hover:bg-indigo-700 rounded-lg transition-colors"
         >
           {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
@@ -59,15 +61,15 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                 isActive 
-                  ? 'bg-cyan-500 text-slate-900 font-semibold shadow-md' 
-                  : 'hover:bg-slate-700 hover:bg-opacity-70'
+                  ? 'bg-blue-500 text-white font-semibold shadow-md' 
+                  : 'hover:bg-indigo-700 hover:bg-opacity-70'
               } ${collapsed ? 'justify-center' : ''}`}
-              title={collapsed ? item.label : ''}
+              title={collapsed ? t(item.label) : ''}
             >
               <Icon size={20} className="flex-shrink-0" />
               {!collapsed && (
                 <>
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium">{t(item.label)}</span>
                   {item.badge && (
                     <span className="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">
                       {item.badge}
@@ -80,19 +82,19 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className={`p-4 border-t border-slate-700 ${collapsed ? 'text-center' : ''}`}>
+      <div className={`p-4 border-t border-indigo-700 ${collapsed ? 'text-center' : ''}`}>
         {!collapsed ? (
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 font-bold shadow-md">
+            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
               {user?.name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium truncate">{user?.name}</p>
-              <p className="text-sm text-slate-400 capitalize">{user?.role}</p>
+              <p className="text-sm text-indigo-300 capitalize">{user?.role}</p>
             </div>
           </div>
         ) : (
-          <div className="w-10 h-10 mx-auto bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 font-bold shadow-md">
+          <div className="w-10 h-10 mx-auto bg-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
             {user?.name.charAt(0)}
           </div>
         )}

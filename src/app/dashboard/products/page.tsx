@@ -62,7 +62,7 @@ export default function ProductsPage() {
           <h1 className="text-3xl font-bold text-gray-900">สินค้า</h1>
           <p className="text-gray-500 mt-1">จัดการรายการสินค้าของคุณ</p>
         </div>
-        <button className="bg-slate-700 text-white px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2 font-medium shadow-md">
+        <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 font-medium shadow-md">
           <Plus size={20} />
           เพิ่มสินค้า
         </button>
@@ -77,10 +77,10 @@ export default function ProductsPage() {
               placeholder="ค้นหาสินค้า..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
-          <button type="submit" className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors">
+          <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
             ค้นหา
           </button>
           <button type="button" className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
@@ -109,7 +109,7 @@ export default function ProductsPage() {
                 <p className="text-sm text-gray-500 mb-2">{product.brand}</p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-lg font-bold text-cyan-600">{formatCurrency(product.price)}</p>
+                    <p className="text-lg font-bold text-blue-600">{formatCurrency(product.price)}</p>
                     <p className="text-xs text-gray-500">คงเหลือ: {product.stock}</p>
                   </div>
                   <div className="flex items-center gap-1 text-yellow-500">
