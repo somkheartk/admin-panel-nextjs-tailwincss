@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Plus, Search, Filter } from 'lucide-react';
 import { apiService } from '@/services/api.service';
+import { useLanguage } from '@/contexts/LanguageContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorMessage from '@/components/ErrorMessage';
 import Pagination from '@/components/Pagination';
@@ -10,6 +11,7 @@ import type { ApiUser } from '@/types/api';
 import Image from 'next/image';
 
 export default function UsersPage() {
+  const { t } = useLanguage();
   const [users, setUsers] = useState<ApiUser[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -138,8 +140,8 @@ export default function UsersPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button className="text-blue-600 hover:text-blue-900 mr-4">แก้ไข</button>
-                        <button className="text-red-600 hover:text-red-900">ลบ</button>
+                        <button className="text-blue-600 hover:text-blue-900 mr-4">{t('users.edit')}</button>
+                        <button className="text-red-600 hover:text-red-900">{t('users.delete')}</button>
                       </td>
                     </tr>
                   ))}

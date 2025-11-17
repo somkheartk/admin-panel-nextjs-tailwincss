@@ -11,11 +11,13 @@ import {
 } from 'lucide-react';
 import { apiService } from '@/services/api.service';
 import { formatCurrency, formatNumber } from '@/utils/format';
+import { useLanguage } from '@/contexts/LanguageContext';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorMessage from '@/components/ErrorMessage';
 import type { DashboardStats, RecentOrder } from '@/types/api';
 
 export default function DashboardPage() {
+  const { t } = useLanguage();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [recentOrders, setRecentOrders] = useState<RecentOrder[]>([]);
   const [loading, setLoading] = useState(true);
@@ -86,7 +88,7 @@ export default function DashboardPage() {
 
   const statsCards = [
     {
-      title: 'ยอดขายทั้งหมด',
+      title: t('dashboard.totalSales'),
       value: formatCurrency(stats.totalSales),
       change: `+${stats.salesChange}%`,
       trend: 'up',
@@ -94,7 +96,7 @@ export default function DashboardPage() {
       color: 'bg-indigo-600',
     },
     {
-      title: 'คำสั่งซื้อวันนี้',
+      title: t('dashboard.todayOrders'),
       value: formatNumber(stats.totalOrders),
       change: `+${stats.ordersChange}%`,
       trend: 'up',
@@ -102,7 +104,7 @@ export default function DashboardPage() {
       color: 'bg-blue-600',
     },
     {
-      title: 'สินค้าทั้งหมด',
+      title: t('dashboard.totalProducts'),
       value: formatNumber(stats.totalProducts),
       change: `${stats.productsChange}%`,
       trend: 'down',

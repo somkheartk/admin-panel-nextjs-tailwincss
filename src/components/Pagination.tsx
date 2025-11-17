@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PaginationProps {
   currentPage: number;
@@ -15,6 +16,7 @@ export default function Pagination({
   totalItems,
   itemsPerPage,
 }: PaginationProps) {
+  const { t } = useLanguage();
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
     const showPages = 5;
@@ -66,7 +68,7 @@ export default function Pagination({
               : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
           }`}
         >
-          ก่อนหน้า
+          {t('pagination.previous')}
         </button>
         <button
           onClick={() => onPageChange(currentPage + 1)}
@@ -77,7 +79,7 @@ export default function Pagination({
               : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
           }`}
         >
-          ถัดไป
+          {t('pagination.next')}
         </button>
       </div>
 
@@ -86,9 +88,9 @@ export default function Pagination({
         <div>
           {totalItems && itemsPerPage && (
             <p className="text-sm text-gray-700">
-              แสดง <span className="font-medium">{startItem}</span> ถึง{' '}
-              <span className="font-medium">{endItem}</span> จาก{' '}
-              <span className="font-medium">{totalItems}</span> รายการ
+              {t('pagination.showing')} <span className="font-medium">{startItem}</span> {t('pagination.to')}{' '}
+              <span className="font-medium">{endItem}</span> {t('pagination.of')}{' '}
+              <span className="font-medium">{totalItems}</span> {t('pagination.items')}
             </p>
           )}
         </div>
@@ -101,7 +103,7 @@ export default function Pagination({
               className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
                 currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
               }`}
-              title="หน้าแรก"
+              title={t('pagination.first')}
             >
               <ChevronsLeft className="h-5 w-5" />
             </button>
@@ -113,7 +115,7 @@ export default function Pagination({
               className={`relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
                 currentPage === 1 ? 'cursor-not-allowed opacity-50' : ''
               }`}
-              title="ก่อนหน้า"
+              title={t('pagination.previous')}
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -153,7 +155,7 @@ export default function Pagination({
               className={`relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
                 currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''
               }`}
-              title="ถัดไป"
+              title={t('pagination.next')}
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -165,7 +167,7 @@ export default function Pagination({
               className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
                 currentPage === totalPages ? 'cursor-not-allowed opacity-50' : ''
               }`}
-              title="หน้าสุดท้าย"
+              title={t('pagination.last')}
             >
               <ChevronsRight className="h-5 w-5" />
             </button>

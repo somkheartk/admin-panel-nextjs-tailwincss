@@ -78,8 +78,18 @@ const translations = {
     
     // Inventory
     'inventory.title': 'คลังสินค้า',
-    'inventory.overview': 'ภาพรวมคลังสินค้า',
+    'inventory.overview': 'จัดการและติดตามสต็อกสินค้า',
     'inventory.search': 'ค้นหาสินค้าในคลัง...',
+    'inventory.totalItems': 'สินค้าทั้งหมด',
+    'inventory.lowStock': 'สินค้าใกล้หมด',
+    'inventory.outOfStock': 'สินค้าหมด',
+    'inventory.inStock': 'มีสินค้า',
+    'inventory.gridView': 'มุมมองกริด',
+    'inventory.tableView': 'มุมมองตาราง',
+    'inventory.product': 'สินค้า',
+    'inventory.sku': 'รหัสสินค้า',
+    'inventory.stock': 'คงเหลือ',
+    'inventory.units': 'หน่วย',
     
     // Reports
     'reports.title': 'รายงาน',
@@ -139,6 +149,16 @@ const translations = {
     'common.to': 'ถึง',
     'common.of': 'จาก',
     'common.results': 'รายการ',
+    
+    // Pagination
+    'pagination.showing': 'แสดง',
+    'pagination.to': 'ถึง',
+    'pagination.of': 'จาก',
+    'pagination.items': 'รายการ',
+    'pagination.previous': 'ก่อนหน้า',
+    'pagination.next': 'ถัดไป',
+    'pagination.first': 'หน้าแรก',
+    'pagination.last': 'หน้าสุดท้าย',
   },
   en: {
     // Sidebar
@@ -207,8 +227,18 @@ const translations = {
     
     // Inventory
     'inventory.title': 'Inventory',
-    'inventory.overview': 'Inventory Overview',
+    'inventory.overview': 'Track and manage your stock levels',
     'inventory.search': 'Search inventory...',
+    'inventory.totalItems': 'Total Items',
+    'inventory.lowStock': 'Low Stock',
+    'inventory.outOfStock': 'Out of Stock',
+    'inventory.inStock': 'In Stock',
+    'inventory.gridView': 'Grid View',
+    'inventory.tableView': 'Table View',
+    'inventory.product': 'Product',
+    'inventory.sku': 'SKU',
+    'inventory.stock': 'Stock',
+    'inventory.units': 'units',
     
     // Reports
     'reports.title': 'Reports',
@@ -261,14 +291,24 @@ const translations = {
     
     // Common
     'common.loading': 'Loading...',
-    'common.error': 'Error occurred',
+    'common.error': 'Error',
     'common.retry': 'Retry',
     'common.logout': 'Logout',
     'common.showing': 'Showing',
     'common.to': 'to',
     'common.of': 'of',
     'common.results': 'results',
-  },
+    
+    // Pagination
+    'pagination.showing': 'Showing',
+    'pagination.to': 'to',
+    'pagination.of': 'of',
+    'pagination.items': 'items',
+    'pagination.previous': 'Previous',
+    'pagination.next': 'Next',
+    'pagination.first': 'First Page',
+    'pagination.last': 'Last Page',
+  }
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

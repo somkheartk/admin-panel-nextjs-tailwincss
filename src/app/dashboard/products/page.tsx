@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus, Search, Filter } from 'lucide-react';
+import { Plus, Search, Filter, X } from 'lucide-react';
 import { apiService } from '@/services/api.service';
 import { formatCurrency, formatNumber } from '@/utils/format';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -17,6 +17,15 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    price: '',
+    stock: '',
+    category: '',
+    brand: '',
+  });
   const itemsPerPage = 12;
 
   const fetchProducts = async (page = 1) => {
@@ -53,6 +62,34 @@ export default function ProductsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleAddProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+    // ในระบบจริงจะส่งข้อมูลไปยัง API
+    console.log('Adding product:', formData);
+    
+    // แสดงข้อความสำเร็จ (ในระบบจริงควรใช้ toast notification)
+    alert(`เพิ่มสินค้า "${formData.title}" สำเร็จ!`);
+    
+    // รีเซ็ตฟอร์มและปิด modal
+    setFormData({
+      title: '',
+      description: '',
+      price: '',
+      stock: '',
+      category: '',
+      brand: '',
+    });
+    setShowAddModal(false);
+    
+    // รีเฟรชข้อมูล
+    fetchProducts(currentPage);
+  };
+
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
@@ -62,7 +99,10 @@ export default function ProductsPage() {
           <h1 className="text-3xl font-bold text-gray-900">สินค้า</h1>
           <p className="text-gray-500 mt-1">จัดการรายการสินค้าของคุณ</p>
         </div>
-        <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 font-medium shadow-md">
+        <button 
+          onClick={() => setShowAddModal(true)}
+          className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2 font-medium shadow-md"
+        >
           <Plus size={20} />
           เพิ่มสินค้า
         </button>
@@ -131,6 +171,169 @@ export default function ProductsPage() {
           />
         )}
       </div>
+
+      {/* Add Product Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white">
+              <h2 className="text-2xl font-bold text-gray-900">เพิ่มสินค้าใหม่</h2>
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <form onSubmit={handleAddProduct} className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Product Name */}
+                <div className="md:col-span-2">
+                  <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+                    ชื่อสินค้า <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="กรอกชื่อสินค้า"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Description */}
+                <div className="md:col-span-2">
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+                    รายละเอียดสินค้า
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    rows={4}
+                    placeholder="กรอกรายละเอียดสินค้า"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+                  />
+                </div>
+
+                {/* Price */}
+                <div>
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+                    ราคา (บาท) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                    step="0.01"
+                    placeholder="0.00"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Stock */}
+                <div>
+                  <label htmlFor="stock" className="block text-sm font-medium text-gray-700 mb-2">
+                    จำนวนคงเหลือ <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="stock"
+                    name="stock"
+                    value={formData.stock}
+                    onChange={handleInputChange}
+                    required
+                    min="0"
+                    placeholder="0"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Category */}
+                <div>
+                  <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+                    หมวดหมู่ <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    id="category"
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  >
+                    <option value="">เลือกหมวดหมู่</option>
+                    <option value="smartphones">Smartphones</option>
+                    <option value="laptops">Laptops</option>
+                    <option value="fragrances">Fragrances</option>
+                    <option value="skincare">Skincare</option>
+                    <option value="groceries">Groceries</option>
+                    <option value="home-decoration">Home Decoration</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="tops">Tops</option>
+                    <option value="womens-dresses">Women's Dresses</option>
+                    <option value="womens-shoes">Women's Shoes</option>
+                    <option value="mens-shirts">Men's Shirts</option>
+                    <option value="mens-shoes">Men's Shoes</option>
+                    <option value="mens-watches">Men's Watches</option>
+                    <option value="womens-watches">Women's Watches</option>
+                    <option value="womens-bags">Women's Bags</option>
+                    <option value="womens-jewellery">Women's Jewellery</option>
+                    <option value="sunglasses">Sunglasses</option>
+                    <option value="automotive">Automotive</option>
+                    <option value="motorcycle">Motorcycle</option>
+                    <option value="lighting">Lighting</option>
+                  </select>
+                </div>
+
+                {/* Brand */}
+                <div>
+                  <label htmlFor="brand" className="block text-sm font-medium text-gray-700 mb-2">
+                    แบรนด์
+                  </label>
+                  <input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    value={formData.brand}
+                    onChange={handleInputChange}
+                    placeholder="กรอกชื่อแบรนด์"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
+                <button
+                  type="button"
+                  onClick={() => setShowAddModal(false)}
+                  className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                >
+                  ยกเลิก
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-md"
+                >
+                  เพิ่มสินค้า
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
