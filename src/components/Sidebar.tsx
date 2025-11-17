@@ -37,12 +37,12 @@ export default function Sidebar() {
   );
 
   return (
-    <aside className={`${collapsed ? 'w-20' : 'w-64'} bg-gradient-to-b from-blue-700 to-blue-600 text-white transition-all duration-300 ease-in-out flex flex-col shadow-lg`}>
-      <div className="p-6 flex items-center justify-between border-b border-blue-500">
+    <aside className={`${collapsed ? 'w-20' : 'w-64'} bg-gradient-to-b from-slate-900 to-slate-800 text-white transition-all duration-300 ease-in-out flex flex-col shadow-lg`}>
+      <div className="p-6 flex items-center justify-between border-b border-slate-700">
         {!collapsed && <h1 className="text-2xl font-bold text-white">⚡ Flash POS</h1>}
         <button 
           onClick={() => setCollapsed(!collapsed)}
-          className="p-2 hover:bg-blue-800 rounded-lg transition-colors"
+          className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
         >
           {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
@@ -59,8 +59,8 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                 isActive 
-                  ? 'bg-sky-400 text-blue-900 font-semibold shadow-md' 
-                  : 'hover:bg-blue-800 hover:bg-opacity-50'
+                  ? 'bg-cyan-500 text-slate-900 font-semibold shadow-md' 
+                  : 'hover:bg-slate-700 hover:bg-opacity-70'
               } ${collapsed ? 'justify-center' : ''}`}
               title={collapsed ? item.label : ''}
             >
@@ -80,19 +80,19 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className={`p-4 border-t border-blue-500 ${collapsed ? 'text-center' : ''}`}>
+      <div className={`p-4 border-t border-slate-700 ${collapsed ? 'text-center' : ''}`}>
         {!collapsed ? (
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-sky-400 rounded-full flex items-center justify-center text-blue-900 font-bold shadow-md">
+            <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 font-bold shadow-md">
               {user?.name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium truncate">{user?.name}</p>
-              <p className="text-sm text-blue-200 capitalize">{user?.role}</p>
+              <p className="text-sm text-slate-400 capitalize">{user?.role}</p>
             </div>
           </div>
         ) : (
-          <div className="w-10 h-10 mx-auto bg-sky-400 rounded-full flex items-center justify-center text-blue-900 font-bold shadow-md">
+          <div className="w-10 h-10 mx-auto bg-cyan-500 rounded-full flex items-center justify-center text-slate-900 font-bold shadow-md">
             {user?.name.charAt(0)}
           </div>
         )}

@@ -47,9 +47,9 @@ export default function SalesPage() {
   const getStatusBadge = (index: number) => {
     const statuses = ['เสร็จสิ้น', 'กำลังดำเนินการ', 'รอดำเนินการ'];
     const colors = [
-      'bg-blue-100 text-blue-900',
-      'bg-sky-100 text-sky-900',
-      'bg-indigo-100 text-indigo-900',
+      'bg-cyan-100 text-cyan-900',
+      'bg-slate-200 text-slate-900',
+      'bg-gray-200 text-gray-900',
     ];
     const statusIndex = index % 3;
     return { status: statuses[statusIndex], color: colors[statusIndex] };
@@ -62,7 +62,7 @@ export default function SalesPage() {
           <h1 className="text-3xl font-bold text-gray-900">ขายสินค้า</h1>
           <p className="text-gray-500 mt-1">จัดการการขายและธุรกรรม</p>
         </div>
-        <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium shadow-md">
+        <button className="bg-slate-700 text-white px-6 py-3 rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2 font-medium shadow-md">
           <Plus size={20} />
           ขายใหม่
         </button>
@@ -130,7 +130,7 @@ export default function SalesPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
                           -{formatCurrency(cart.total - cart.discountedTotal)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-blue-700">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-cyan-600">
                           {formatCurrency(cart.discountedTotal)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

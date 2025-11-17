@@ -19,7 +19,7 @@ export default function Header() {
             <input
               type="text"
               placeholder="Search products, orders, customers..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function Header() {
           <select 
             value={user?.role} 
             onChange={(e) => switchRole(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 capitalize"
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-slate-500 capitalize"
           >
             <option value="admin">Admin</option>
             <option value="manager">Manager</option>
@@ -49,7 +49,7 @@ export default function Header() {
           </button>
 
           <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-sky-400 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold shadow-md">
               {user?.name.charAt(0)}
             </div>
             <div className="hidden md:block">
