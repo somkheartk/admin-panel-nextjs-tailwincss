@@ -37,6 +37,13 @@ export const menuItems: MenuItem[] = [
     roles: ['admin', 'manager'],
   },
   {
+    id: 'customers',
+    label: 'menu.customers',
+    icon: 'UserCircle',
+    href: '/dashboard/customers',
+    roles: ['admin', 'manager', 'cashier'],
+  },
+  {
     id: 'users',
     label: 'menu.users',
     icon: 'Users',

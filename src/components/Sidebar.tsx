@@ -8,7 +8,8 @@ import {
   Package, 
   Warehouse, 
   BarChart3, 
-  Users, 
+  Users,
+  UserCircle,
   Settings,
   ChevronLeft,
   ChevronRight
@@ -25,6 +26,7 @@ const iconMap: Record<string, any> = {
   Warehouse,
   BarChart3,
   Users,
+  UserCircle,
   Settings,
 };
 

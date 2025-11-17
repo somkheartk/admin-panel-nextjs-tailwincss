@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Plus, Search, Filter, X } from 'lucide-react';
+import { Plus, Search, Filter, X, Grid3x3, List } from 'lucide-react';
 import { apiService } from '@/services/api.service';
 import { formatCurrency, formatNumber } from '@/utils/format';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -9,6 +9,8 @@ import ErrorMessage from '@/components/ErrorMessage';
 import Pagination from '@/components/Pagination';
 import type { Product } from '@/types/api';
 import Image from 'next/image';
+
+type ViewMode = 'grid' | 'table';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -18,6 +20,7 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -109,56 +112,161 @@ export default function ProductsPage() {
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <form onSubmit={handleSearch} className="flex gap-4 mb-6">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="ค้นหาสินค้า..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <form onSubmit={handleSearch} className="flex gap-4 flex-1">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <input
+                type="text"
+                placeholder="ค้นหาสินค้า..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              ค้นหา
+            </button>
+          </form>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                viewMode === 'grid'
+                  ? 'bg-indigo-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Grid3x3 size={20} />
+              กริด
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                viewMode === 'table'
+                  ? 'bg-indigo-600 text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <List size={20} />
+              ตาราง
+            </button>
           </div>
-          <button type="submit" className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-            ค้นหา
-          </button>
-          <button type="button" className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
-            <Filter size={20} />
-            กรอง
-          </button>
-        </form>
+        </div>
 
         {loading ? (
           <LoadingSpinner className="py-12" />
         ) : error ? (
           <ErrorMessage message={error} onRetry={fetchProducts} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {products.map((product) => (
-              <div key={product.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="relative w-full h-40 mb-3 bg-gray-100 rounded-lg overflow-hidden">
-                  <Image
-                    src={product.thumbnail}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.title}</h3>
-                <p className="text-sm text-gray-500 mb-2">{product.brand}</p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-lg font-bold text-blue-600">{formatCurrency(product.price)}</p>
-                    <p className="text-xs text-gray-500">คงเหลือ: {product.stock}</p>
+          <>
+            {viewMode === 'grid' ? (
+              /* Grid View */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {products.map((product) => (
+                  <div key={product.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div className="relative w-full h-40 mb-3 bg-gray-100 rounded-lg overflow-hidden">
+                      <Image
+                        src={product.thumbnail}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">{product.title}</h3>
+                    <p className="text-sm text-gray-500 mb-2">{product.brand}</p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-lg font-bold text-blue-600">{formatCurrency(product.price)}</p>
+                        <p className="text-xs text-gray-500">คงเหลือ: {product.stock}</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-yellow-500">
+                        <span className="text-sm font-medium">⭐ {product.rating}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1 text-yellow-500">
-                    <span className="text-sm font-medium">⭐ {product.rating}</span>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            ) : (
+              /* Table View */
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        สินค้า
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        แบรนด์
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        หมวดหมู่
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        ราคา
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        คงเหลือ
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                        คะแนน
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {products.map((product) => (
+                      <tr key={product.id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="relative h-12 w-12 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                              <Image
+                                src={product.thumbnail}
+                                alt={product.title}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900 line-clamp-1 max-w-xs">
+                                {product.title}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                          {product.brand}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className="bg-gray-100 px-3 py-1 rounded-full text-xs font-medium text-gray-700">
+                            {product.category}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-indigo-600">
+                          {formatCurrency(product.price)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                            product.stock === 0 
+                              ? 'bg-red-100 text-red-800' 
+                              : product.stock < 20 
+                              ? 'bg-orange-100 text-orange-800' 
+                              : 'bg-green-100 text-green-800'
+                          }`}>
+                            {product.stock}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          <div className="flex items-center gap-1 text-yellow-500">
+                            ⭐ <span className="font-medium text-gray-900">{product.rating}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </>
         )}
 
         {!loading && !error && products.length > 0 && (

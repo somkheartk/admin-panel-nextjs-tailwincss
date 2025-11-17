@@ -18,6 +18,7 @@ const translations = {
     'menu.products': 'สินค้า',
     'menu.inventory': 'คลังสินค้า',
     'menu.reports': 'รายงาน',
+    'menu.customers': 'ลูกค้า',
     'menu.users': 'ผู้ใช้งาน',
     'menu.settings': 'ตั้งค่า',
     
@@ -167,6 +168,7 @@ const translations = {
     'menu.products': 'Products',
     'menu.inventory': 'Inventory',
     'menu.reports': 'Reports',
+    'menu.customers': 'Customers',
     'menu.users': 'Users',
     'menu.settings': 'Settings',
     

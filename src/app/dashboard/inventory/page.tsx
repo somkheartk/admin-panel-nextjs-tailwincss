@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { AlertTriangle, Search, Grid3x3, List, Package } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { apiService } from '@/services/api.service';
-import { Product } from '@/types';
+import { Product } from '@/types/api';
 import { formatCurrency } from '@/utils/format';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ErrorMessage from '@/components/ErrorMessage';
