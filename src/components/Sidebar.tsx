@@ -12,7 +12,9 @@ import {
   UserCircle,
   Settings,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Utensils,
+  ChefHat
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -28,6 +30,8 @@ const iconMap: Record<string, any> = {
   Users,
   UserCircle,
   Settings,
+  Utensils,
+  ChefHat,
 };
 
 export default function Sidebar() {

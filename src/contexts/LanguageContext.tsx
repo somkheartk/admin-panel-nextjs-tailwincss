@@ -14,6 +14,8 @@ const translations = {
   th: {
     // Sidebar
     'menu.dashboard': 'แดชบอร์ด',
+    'menu.tables': 'โต๊ะอาหาร',
+    'menu.kitchen': 'ครัว',
     'menu.sales': 'ขายสินค้า',
     'menu.products': 'สินค้า',
     'menu.inventory': 'คลังสินค้า',
@@ -164,6 +166,8 @@ const translations = {
   en: {
     // Sidebar
     'menu.dashboard': 'Dashboard',
+    'menu.tables': 'Tables',
+    'menu.kitchen': 'Kitchen',
     'menu.sales': 'Sales',
     'menu.products': 'Products',
     'menu.inventory': 'Inventory',

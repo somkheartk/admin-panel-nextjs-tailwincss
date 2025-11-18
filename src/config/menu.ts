@@ -9,6 +9,20 @@ export const menuItems: MenuItem[] = [
     roles: ['admin', 'manager', 'cashier'],
   },
   {
+    id: 'tables',
+    label: 'menu.tables',
+    icon: 'Utensils',
+    href: '/dashboard/tables',
+    roles: ['admin', 'manager', 'cashier'],
+  },
+  {
+    id: 'kitchen',
+    label: 'menu.kitchen',
+    icon: 'ChefHat',
+    href: '/dashboard/kitchen',
+    roles: ['admin', 'manager', 'cashier'],
+  },
+  {
     id: 'sales',
     label: 'menu.sales',
     icon: 'ShoppingCart',
